@@ -1,0 +1,177 @@
+PS5SX2 - Test Build 1 (vk-285-112)
+PCSX2 for jailbroken PS5. This is a test build: it shows a TESTING watermark
+and keeps detailed logs, so we can find and fix problems.
+Tested on a PS5 Pro (firmware 11.40) and an original PS5 (firmware 4.03);
+testers have run it on firmware 6.02 to 12.70.
+
+NEW IN vk-285-112
+- Texture packs: a pack whose PNG files sit in subfolders of
+  /data/PCSX2/textures/<game ID>/replacements/ now loads. Before, no file
+  in a subfolder was found, so a pack sorted into folders did nothing.
+  Turn it on per game on the settings page: Graphics > Texture
+  replacements. PNG only (DDS packs don't load). Textures load as the game
+  first uses them, so they can pop in a moment after a new area appears.
+- Big packs cost speed. Ratchet & Clank's HD pack holds 60 fps at 8x on a
+  PS5 Pro, with nothing to spare. If a game slows down with a pack, lower
+  its resolution on the settings page.
+- Updating from an earlier test build: close PS5SX2, then replace only
+  /data/homebrew/PPSA99203/eboot.bin. Keep your /data/PCSX2 folder: your
+  settings, memory cards and save states are in it.
+
+NEW IN vk-285-110
+- Your language: PS5SX2 now follows the PS5's system language. Games
+  with several languages (most PAL games) start in it, so a Spanish PS5
+  plays them in Spanish. To pick another language for a game, open the
+  settings page: Game > Game language (it applies at the next start).
+- The shelf and the notifications follow the PS5's language too: English,
+  French, Spanish, German, Italian, Dutch or Portuguese (Portugal and
+  Brazil). Other languages get English, and the settings page is still in
+  English. A wrong word? Tell us on Discord.
+- Covers for games on a USB drive: PS5SX2 now also uses a picture next
+  to the game with the same name (Game.iso with Game.jpg or Game.png), a
+  "covers" folder on the drive, and Open PS2 Loader's ART folder, so a
+  drive set up for OPL comes with its covers. Covers that still have to
+  be downloaded may now show up on the shelf right away; if not, they
+  come at the next start, as before.
+
+NEW IN vk-285-109
+- Two players: turn on the second controller and pick a user for it
+  (a second account or a guest) before you start the game. That
+  controller is then player 2. A controller added after the game has
+  started isn't picked up: go back to the shelf and start the game again.
+- Scarface, Killzone, ShellShock: Nam '67, Call of Duty 2: Big Red One
+  and Crash Tag Team Racing: a fix for a bug that fed these games wrong
+  numbers in their graphics code on the PS5. Please report how they run
+  now.
+- CHD files made with "chdman createcd" from an .iso are read too (many
+  people make DVD games that way). If a CHD still has no cover, the
+  report says what kind of CHD it is: please send it.
+- No games found: PS5SX2 now tells you so and closes, instead of
+  crashing. A game that can't start says why in a notification.
+- Download logs now includes the GPU hang dump (vkhang.txt) when there
+  is one.
+
+NEW IN vk-285-108
+- CHD games: .chd files are listed and play like .iso files, from the
+  same folders (/data/PCSX2/games/ and USB drives). Make them with MAME's
+  chdman: "chdman createdvd" for DVD games, "chdman createcd" for CD
+  games. A CHD made against a parent CHD needs the parent in the same
+  folder. The first start after you add CHDs takes a little longer,
+  because PS5SX2 reads each one's game ID once.
+  CHD support is new: if a CHD game doesn't show up, has no cover or
+  won't start, please report it and say how you made the CHD.
+- Fewer stutters: the graphics thread no longer waits for log writes.
+  In Shadow of the Colossus on the PS5 Pro that was a hitch of about
+  33 ms every few seconds.
+- Texture replacements (new, not tried with a real pack yet): turn on
+  "Texture replacements" in the Graphics section of the settings page,
+  and put the pack's PNG files in
+  /data/PCSX2/textures/<game ID>/replacements/, for example
+  /data/PCSX2/textures/SCUS-97472/replacements/ for Shadow of the Colossus.
+  DDS files aren't supported.
+
+NEW IN vk-285-105
+- Much faster at 5x and 6x in games that shrink the picture for their
+  effects (bloom, blur and the like): the PS5's GPU did that step very
+  slowly. Shadow of the Colossus's heaviest view at 6x on the PS5 Pro:
+  37 fps on vk-285-94, about 57 now.
+- Less work for the emulated CPU in games that call the PS2's system a
+  lot or feed VU1 many small packets, and less for the graphics thread on
+  every draw. Other games may run a little faster too.
+- These CPU shortcuts are new, so if a game that worked on vk-285-94 now
+  hangs, crashes or looks wrong, please report it. To check whether
+  they're the cause, create four empty files named nohletid, noeretfast,
+  vifslow and vif1nofuse in /data/PCSX2/flags/, try the game again, and
+  tell us what happened (then delete those four files).
+
+NEW IN vk-285-94
+- Fixed a VU1 bug on the PS5: one kind of memory read in VU1 programs
+  (ILWR through register vi00) read the wrong memory. In Shadow of the
+  Colossus it made a lighting program run far too long, which slowed the
+  game down. Other games that use it may run or look better too.
+- Fixed a crash in heavy scenes: when the emulated CPU got far ahead of
+  VU1, the queue between them could be overwritten, and PS5SX2 closed.
+  Shadow of the Colossus at 6x crashed within minutes before this fix.
+- Faster in scenes that run many VU1 programs (Shadow of the Colossus's
+  big views, for example): less work for each program on the emulated
+  CPU's thread and on the graphics thread.
+- The notification test from vk-285-73 is gone. Thanks for your reports.
+
+NEW IN vk-285-73
+- Games that change a texture while drawing a frame run smoother on older
+  firmware (Gran Turismo 4 on 8.40 in your reports): the PS5 now makes
+  those changes itself, inside the frame, instead of stopping the frame for
+  each one.
+- USB keyboard and mouse (for games that support them, like Half-Life):
+  the support is in, but on the PS5 Pro we test on (11.40) the system
+  refused to load its keyboard and mouse libraries for PS5SX2, so it
+  doesn't work there yet. If you try it on your firmware, send the logs
+  either way. To turn it off, create an empty file named nousbkbm in
+  /data/PCSX2/flags/.
+- The logs show each thread's real load (EE, GS, VU), and the console line
+  no longer says "CPU 0.00 GHz".
+
+WHAT YOU NEED
+- A jailbroken PS5 with kstuff, a payload loader and an FTP server payload
+  (ftpsrv, for example).
+- The PS5SX2 Helper payload. Get it from Spyros on Discord (sword.pdf).
+- Your own PS2 BIOS, dumped from your own PS2.
+- At least one of your own PS2 games as an .iso or .chd file.
+No BIOS, games or keys come with PS5SX2.
+
+INSTALL
+1. Copy the PPSA99203 folder to /data/homebrew/
+   (you get /data/homebrew/PPSA99203/eboot.bin).
+   Add it to the home screen the way you install your other homebrew apps.
+2. Copy the PCSX2 folder to /data/ (you get /data/PCSX2/).
+   If your FTP client skipped the empty folders, create /data/PCSX2/bios/
+   and /data/PCSX2/games/ yourself.
+3. Put your BIOS in /data/PCSX2/bios/. One BIOS only; the main 4 MB file
+   is enough, and its name doesn't matter.
+4. Put your games (.iso or .chd) in /data/PCSX2/games/, straight in the
+   folder, not in subfolders.
+   Games on a USB drive are listed too, from the drive's root or its DVD,
+   CD or PS5SX2 folder. Please tell us if yours don't show up.
+5. Add this line to /data/whitelist.txt (create the file if it's missing,
+   and keep any lines already in it):
+   PPSA99203
+6. Fully restart the PS5 (not rest mode). Then jailbreak, load kstuff,
+   and load the PS5SX2 Helper.
+   Do this every time the PS5 starts, before you open PS5SX2.
+7. Start PS5SX2 from the home screen. The first start downloads the game
+   covers, so the PS5 needs internet.
+
+USING IT
+- The shelf opens with your games (even with just one). Pick one and press X.
+- Settings page: scan the QR code in the shelf's corner with your phone (on
+  the same network as the PS5). If it won't scan, open
+  http://<your PS5's IP>:8844/?t=<token> instead. The token is in
+  /data/PCSX2/webui_token.txt.
+- Resolution: 4x for most games; a few tested games have their own
+  settings. Change it per game on the settings page.
+- Back to the game list: hold L1 + R1 and click the touchpad.
+- Save state: touch the left side of the touchpad and press X.
+  Load state: touch the right side and press X.
+  A finger resting on the touchpad counts as a touch: pressing X then saves
+  (or loads), and the game pauses for a few seconds while it does.
+
+REPORTING A PROBLEM (this is what the test is for)
+1. As soon as something goes wrong, open the settings page and write a
+   short note under "Report a problem". It's saved with the time and the
+   game you're playing.
+2. Tap "Download logs" and post that file in Discord, with the game's name
+   and what happened. Do it right after the problem: the detailed logs
+   keep only the last three starts of PS5SX2, this one included.
+Crashes, slowdowns, graphics glitches and games that won't start are all
+useful to report.
+
+GOOD TO KNOW
+- Only .iso and .chd files are listed (not .cso, .bin/.cue or zip files).
+- With no games at all, PS5SX2 closes as soon as it starts.
+- The speed switches are the files in /data/PCSX2/flags/. Leave that
+  folder as it is unless we ask you to change something.
+- Some games run at 30 fps on the PS2 itself (GTA Vice City, some
+  menus and cutscenes). 30 fps at 100% speed there is normal.
+- Some games need a faster emulated CPU for 60 fps (Warship Gunner 2 in
+  battle, Bully with its 60 FPS patch): raise EE speed on the settings page
+  to 180% or 300%. If speed drops below 100%, go back down a step.

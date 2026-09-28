@@ -1,0 +1,2 @@
+# keep every file byte for byte (eboot, CRLF text)
+* -text

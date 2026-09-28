@@ -1,0 +1,35 @@
+PS5SX2 - notices
+
+PS5SX2 is a port of PCSX2 to jailbroken PS5 consoles, made by Spyros
+(Discord sword.pdf, X @sword_pdf) as a passion project.
+
+LICENCE
+- PS5SX2, like PCSX2, is free software under the GNU General Public License,
+  version 3 or later (see COPYING.GPLv3). It comes with no warranty.
+- The complete source code of this build (PS5SX2 c9f0523, Vulkan driver
+  22f13b2) is available on request from Spyros.
+
+CREDITS
+- PCSX2, by the PCSX2 Dev Team (GPL-3.0-or-later). PS5SX2 is not affiliated
+  with or endorsed by the PCSX2 team.
+- The PS5 Vulkan driver is based on Mihawk-99's PS5_Vulkan.
+- The PS5 app layer builds on BlackBearReloaded's ps5-native-app-boilerplate
+  (GPL-3.0-or-later).
+- Built with the ps5-payload-dev SDK by John Tornblom (GPL-3.0-or-later, with
+  LLVM libc++/libunwind and a FreeBSD-derived libc).
+- Also inside: Mesa (MIT), opengnm-psbc (MIT), glslang, rapidyaml (MIT),
+  Project Nayuki's QR Code generator (MIT), Sean Barrett's stb libraries
+  (public domain), the Roboto (Apache-2.0) and PromptFont (OFL-1.1) fonts,
+  and Font Awesome Free icons (CC BY 4.0).
+- For CHD images: libchdr by Romain Tisserand (BSD-3-Clause), Zstandard by
+  Meta Platforms (BSD-3-Clause), zlib by Jean-loup Gailly and Mark Adler
+  (zlib licence), and the LZMA SDK by Igor Pavlov and dr_flac by David Reid
+  (public domain). Their licence texts are in THIRD-PARTY-LICENSES.txt.
+- Game covers are downloaded from xlenore/ps2-covers.
+- The Discord and X logos are their owners' trademarks, used only to point to
+  the author's accounts.
+
+TRADEMARKS
+"PlayStation", "PS2" and "PS5" are trademarks of Sony Interactive
+Entertainment. PS5SX2 is an independent project and is not affiliated with or
+endorsed by Sony Interactive Entertainment.
