@@ -14,8 +14,10 @@ two folders below plus `SETUP.txt`, the full setup guide.
 | `PPSA99203/` | `/data/homebrew/PPSA99203/` (the app) |
 | `PCSX2/` | `/data/PCSX2/` (its data: shaders, the game database, switches, tested games' settings and patches) |
 
-You also need a jailbroken PS5 with kstuff, the PS5SX2 Helper payload (from Spyros on Discord), your own
-PS2 BIOS dumped from your own PS2, and your own games. **No BIOS, games or keys are included.**
+You also need a jailbroken PS5 with kstuff, the PS5SX2 Helper payload (from Spyros on Discord),
+[ShadowMountPlus](https://github.com/drakmor/ShadowMountPlus) loaded at every boot (it mounts PS5SX2 and puts it
+on the home screen), your own PS2 BIOS dumped from your own PS2, and your own games. **No BIOS, games or keys
+are included.**
 
 Follow `SETUP.txt` for the first install: the whitelist line, the restart, and where the BIOS and the games go.
 
@@ -33,6 +35,7 @@ On the settings page (scan the QR code on the shelf), write a short note under "
 
 PS5SX2, like PCSX2, is free software under the GNU General Public License, version 3 or later
 (`COPYING.GPLv3`). Credits are in `NOTICE.txt`, third-party licences in `THIRD-PARTY-LICENSES.txt`.
+ShadowMountPlus is by drakmor, based on VoidWhisper's ShadowMount.
 
 "PlayStation", "PS2" and "PS5" are trademarks of Sony Interactive Entertainment. PS5SX2 is an independent
 project, not affiliated with or endorsed by Sony Interactive Entertainment or the PCSX2 team.
